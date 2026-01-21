@@ -30,13 +30,16 @@ public final class MiniApiServer {
                 return;
             }
 
-            String ordersJson = "[\n" +
-                "  { \"id\": 1, \"product\": \"Laptop\", \"price\": 1200.0 },\n" +
-                "  { \"id\": 2, \"product\": \"Mouse\",  \"price\": 25.0 }\n" +
-                "]";
+            String ordersJson = """
+        [
+          { "id": 1, "product": "Laptop", "price": 1200.0 },
+          { "id": 2, "product": "Mouse",  "price": 25.0 }
+        ]
+        """;
 
             sendJson(exchange, 200, ordersJson);
         });
+
 
         // Petite page HTML racine (utile pour ZAP, et pour montrer qu'on a aussi du "web")
         server.createContext("/", exchange -> {
@@ -44,17 +47,19 @@ public final class MiniApiServer {
                 sendText(exchange, 405, "Method Not Allowed");
                 return;
             }
-            String html = "<!doctype html>\n" +
-                "<html lang=\"en\">\n" +
-                "  <head><meta charset=\"utf-8\"><title>Mini API</title></head>\n" +
-                "  <body>\n" +
-                "    <h1>Mini API Server</h1>\n" +
-                "    <ul>\n" +
-                "      <li><a href=\"/health\">/health</a></li>\n" +
-                "      <li><a href=\"/api/orders\">/api/orders</a></li>\n" +
-                "    </ul>\n" +
-                "  </body>\n" +
-                "</html>";
+            String html = """
+                    <!doctype html>
+                    <html lang="en">
+                      <head><meta charset="utf-8"><title>Mini API</title></head>
+                      <body>
+                        <h1>Mini API Server</h1>
+                        <ul>
+                          <li><a href="/health">/health</a></li>
+                          <li><a href="/api/orders">/api/orders</a></li>
+                        </ul>
+                      </body>
+                    </html>
+                    """;
             sendHtml(exchange, 200, html);
         });
 
