@@ -1,10 +1,10 @@
-GET http://host.docker.internal:8080/health
+GET http://localhost:8080/health
 HTTP 200
 [Asserts]
 header "Content-Type" contains "application/json"
 jsonpath "$.status" == "UP"
 
-GET http://host.docker.internal:8080/api/orders
+GET http://localhost:8080/api/orders
 HTTP 200
 [Asserts]
 header "Content-Type" contains "application/json"
@@ -17,7 +17,7 @@ jsonpath "$[1].id" == 2
 jsonpath "$[1].product" == "Mouse"
 jsonpath "$[1].price" == 25.0
 
-GET http://host.docker.internal:8080/
+GET http://localhost:8080/
 HTTP 200
 [Asserts]
 xpath "string(//title)" == "Mini API"
